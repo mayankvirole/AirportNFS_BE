@@ -41,6 +41,70 @@ app.get("/flight-details" , async (req, res) => {
 	return res.send({data});
 })
 
+app.post("/add-flight-details", async (req,res) => {
+
+	const { 
+	flight_number ,
+	source,
+	departure ,
+	destination,
+	arrival ,
+	airline ,
+	halt_station ,
+	halt_time ,
+	duration ,
+	delay_time 
+	} = req.body;
+
+	let response = await Flight.create({
+		flight_number ,
+		source,
+		departure ,
+		destination,
+		arrival ,
+		airline ,
+		halt_station ,
+		halt_time ,
+		duration ,
+		delay_time 
+	});
+	return res.send("flight details added ", response);
+})
+
+app.post("/edit-flight", async (req,res) => {
+	try {
+		const { 
+			flight_number ,
+			source,
+			departure ,
+			destination,
+			arrival ,
+			airline ,
+			halt_station ,
+			halt_time ,
+			duration ,
+			delay_time 
+			} = req.body;
+
+			let fl = await Flight.updateOne({ flight_number} , { $set : {
+			source,
+			departure ,
+			destination,
+			arrival ,
+			airline ,
+			halt_station ,
+			halt_time ,
+			duration ,
+			delay_time 
+			}});
+
+			if(fl)
+			return res.send("flight details updated");
+	} catch (error) {
+		return res.send(error);
+	}
+})
+
 connect();
 app.listen( 3000, (req, res) => {
 	console.log("server is running on port 3000");
