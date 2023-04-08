@@ -10,7 +10,8 @@ const UserSchema = mongoose.Schema({
 	password : {
 		type : String,
 		required : true
-	}
+	},
+	airport : String
 })
 
 const User = mongoose.model("User", UserSchema, "users");

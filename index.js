@@ -43,6 +43,15 @@ app.get("/flight-details",async (req,res) => {
 	return res.status(200).send({data});
 })
 
+app.post("/get-flight-by-number", async (req, res) => {
+	try {
+		let data = await Flight.findOne({ flight_number : req.body.flight_number});
+		return res.status(200).send({data});
+	} catch (error) {
+		console.log(error);
+	}
+})
+
 app.post("/add-flight-details",async (req,res) => {
 
 	const {
