@@ -3,6 +3,10 @@ const app = express();
 const mongoose = require("mongoose");
 const {User, Flight}=require('./db');
 require("dotenv").config();
+const cors = require("cors");
+
+app.use(cors());
+
 
 async function connect(){
 	try {
