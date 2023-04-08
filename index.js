@@ -58,6 +58,8 @@ app.post("/add-flight-details",async (req,res) => {
 		delay_time
 	}=req.body;
 
+	let fl = await Flight.findOne({ flight_number});
+	if(!fl){
 	let response=await Flight.create({
 		flight_number,
 		source,
@@ -70,7 +72,9 @@ app.post("/add-flight-details",async (req,res) => {
 		duration,
 		delay_time
 	});
-	return res.status(200).send("flight details added ",response);
+	return res.status(200).send(response);
+	}
+	return res.sendStatus(400);
 })
 
 app.post("/edit-flight",async (req,res) => {
