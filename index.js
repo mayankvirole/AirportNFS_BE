@@ -39,8 +39,8 @@ app.post("/register-supervisor",async (req,res) => {
 })
 
 app.get("/flight-details",async (req,res) => {
-	let data=await Flight.find({});
-	return res.status(200).send({data});
+	let data= (await Flight.find({}))
+	return res.status(200).send(data);
 })
 
 app.post("/get-flight-by-number", async (req, res) => {
