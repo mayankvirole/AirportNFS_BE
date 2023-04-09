@@ -46,7 +46,10 @@ app.get("/flight-details",async (req,res) => {
 app.post("/get-flight-by-number", async (req, res) => {
 	try {
 		let data = await Flight.findOne({ flight_number : req.body.flight_number});
-		return res.status(200).send({data});
+		if(data)
+			return res.status(200).send({data});
+		else 
+			return res.status(400).send("flight details not found !")
 	} catch (error) {
 		console.log(error);
 	}
