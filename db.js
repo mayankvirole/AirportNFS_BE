@@ -25,8 +25,8 @@ const FlightSchema = mongoose.Schema({
 	airline : { type : String},
 	halt_station : { type : String},
 	halt_time : { type : String},
-	duration : { type : Number},
-	delay_time : { type : Number}
+	duration : { type : String},
+	delay_time : { type : String}
 })
 
 const Flight = mongoose.model("Flight", FlightSchema);
