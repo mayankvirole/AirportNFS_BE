@@ -37,7 +37,16 @@ app.post("/register-supervisor",async (req,res) => {
 		return res.send(error);
 	}
 })
-
+app.post("/get-by-airport", async (req, res) => {
+	try {
+		const {destination, airlines} = req.body;
+		let response = (await Flight.find({ destination, airlines}));
+		if(response) return res.status(200).send(response);
+		else return res.status(400).send("error");
+	} catch (error) {
+		return res.send(error);
+	}
+})
 app.get("/flight-details",async (req,res) => {
 	let data= (await Flight.find({}))
 	return res.status(200).send(data);
