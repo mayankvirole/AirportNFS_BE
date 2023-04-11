@@ -52,6 +52,23 @@ app.get("/flight-details",async (req,res) => {
 	return res.status(200).send(data);
 })
 
+app.post("/get-flight-by-airport", async (req, res) => {
+	try {
+		const { airlines, destination, source} = req.body;
+		if(destination) {
+			let response = (await Flight.find({ destination, airlines}));
+			return res.status(200).send(response);
+		}
+		if(source) {
+			let response = (await Flight.find({ source, airlines}));
+			return res.status(200).send(response);
+		}
+		else return res.status(400).send("error !");
+	} catch (error) {
+		console.log(error);
+	}
+})
+
 app.post("/get-flight-by-number", async (req, res) => {
 	try {
 		let data = await Flight.findOne({ flight_number : req.body.flight_number});
